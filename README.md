@@ -1,5 +1,5 @@
 # bug-automation
-this repo for automation bug hounting 
+this repo for automation bug hunting 
 # Bug Automation Tool
 
 An advanced Docker-based automation pipeline for bug bounty hunting and penetration testing. Covers recon (subdomain enum, port scanning) to exploitation (SQLi, XSS, etc.) using tools like Subfinder, Nuclei, SQLMap.
