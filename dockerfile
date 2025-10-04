@@ -48,4 +48,4 @@ RUN chmod +x /usr/local/bin/pipeline.sh
 
 # Entry point: Run the script with args
 ENTRYPOINT ["/usr/local/bin/pipeline.sh"]
-CMD ["--help"]
+
