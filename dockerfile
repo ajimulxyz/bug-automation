@@ -5,7 +5,7 @@ FROM kalilinux/kali-rolling
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
     git curl wget python3 python3-pip golang-go \
-    nmap masscan naabu rustscan \
+    nmap masscan naabu \
     gobuster feroxbuster dirsearch \
     wfuzz ffuf \
     sqlmap nosqlmap \
@@ -13,13 +13,18 @@ RUN apt-get update && apt-get upgrade -y && \
     thc-hydra gitleaks subjack nuclei \
     whatweb webanalyze \
     eyewitness aquatone gowitness \
-    arjun && \
+    arjun \
+    cargo firefox-esr xvfb && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install RustScan (Rust-based)
+RUN cargo install rustscan && \
+    mv /root/.cargo/bin/rustscan /usr/local/bin/
 
 # Install Go-based tools
 RUN go install github.com/projectdiscovery/subfinder/v2@latest && \
     go install github.com/projectdiscovery/assetfinder@latest && \
-    go install github.com/hahwul/dalfox/v2@latest && \  # Assuming dalfox for XSS if needed
+    go install github.com/hahwul/dalfox/v2@latest && \
     go install github.com/tomnomnom/assetfinder@latest && \
     mv /root/go/bin/* /usr/local/bin/
 
@@ -48,4 +53,4 @@ RUN chmod +x /usr/local/bin/pipeline.sh
 
 # Entry point: Run the script with args
 ENTRYPOINT ["/usr/local/bin/pipeline.sh"]
-
+CMD ["--help"]
